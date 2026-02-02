@@ -124,12 +124,14 @@ body {
   position: absolute;
   top: 100%;
   right: -100%;
-  height: 100vh;
+  height: calc(100vh - 100%);
   width: 35rem;
   padding: 0 1.5rem;
   background-color: #fff;
   color: var(--bg);
   transition: 0.3s;
+  overflow-y: auto; 
+  padding-bottom: 5rem;
 }
 
 .shopping-cart.active {
@@ -219,7 +221,7 @@ body {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background-image: url('../img/tekun.png');
+  background-image: url('../img/mrjj.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -251,9 +253,10 @@ body {
 
 .hero .content h1 {
   font-size: 5rem;
+  font-family: 'Pacifico', cursive;
   color: #ffffff;
   text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
-  line-height: 1.2;
+  line-height: 1  .2;
 }
 
 .hero .content h1 span {
@@ -317,10 +320,6 @@ body {
   max-width: 400px;
   display: block;
   margin: 0 auto;
-  -webkit-mask-image: url;
-  -webkit-mask-size: 50%;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
 }
 
 .about .row .content {
@@ -338,6 +337,7 @@ body {
   font-size: 1.5rem;
   font-weight: 100;
   line-height: 1.6;
+  text-align: justify;
 }
 
 
@@ -423,7 +423,9 @@ body {
 .contact .row .map {
   flex: 1 1 45rem;
   width: 100%;
+  height: 50rem; 
   object-fit: cover;
+  border: 0;   
 }
 
 .contact .row form {
@@ -522,6 +524,48 @@ footer .credit a {
   border: 1px solid #666;
   width: 80%;
   animation: animateModal 0.5s;
+}
+.modal-content {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.product-info-wrapper {
+  flex: 1;
+}
+
+.content-flex-container {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.product-description {
+  flex: 1; /* Bagian kiri: Deskripsi */
+  border-right: 1px solid #eee;
+  padding-right: 1.5rem;
+}
+
+.product-controls {
+  flex: 1; /* Bagian kanan: Pilih Varian & Tombol */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-controls select {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  border: 1px solid var(--primary);
+  background: #fff;
+}
+
+.product-controls .cta {
+  margin-top: 1.5rem;
+  width: 100% !important;
+  justify-content: center;
 }
 
 /* Modal Animation */
@@ -649,15 +693,15 @@ footer .credit a {
     font-size: 1.2rem;
   }
 
-  .lokasi .row {
+  .contact .row {
     flex-wrap: wrap;
   }
 
-  .lokasi .row .map {
+  .contact .row .map {
     height: 30rem;
   }
 
-  .lokasi .row form {
+  .contact .row form {
     padding-top: 0;
   }
 
@@ -670,5 +714,39 @@ footer .credit a {
 @media (max-width: 450px) {
   html {
     font-size: 55%;
+  }
+  .products .row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .products .product-card {
+    padding: 1rem;
+  }
+
+  .products .product-image img {
+    height: 15rem;
+  }
+
+  .products .product-content h3 {
+    font-size: 1.4rem;
+  }
+
+  .products .product-price {
+    font-size: 1.1rem;
+  }
+  .contact .row .map {           
+    height: 25rem;               
+  }                              
+
+  .contact h4 {                  
+    font-size: 1.4rem;           
+  }
+  .content-flex-container {
+    flex-direction: column;
+  }
+  .product-description {
+    border-right: none;
+    padding-right: 0;
   }
 }
