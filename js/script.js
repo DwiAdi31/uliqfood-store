@@ -223,7 +223,7 @@ const products = [
     variants: [
       { id: 34, name: 'Jagung', price: 12000 },
       { id: 35, name: 'Original', price: 12000 },
-      { id: 36, name: 'Jagung', price: 12000 },
+      { id: 36, name: 'Jagung bakar', price: 12000 },
       { id: 37, name: 'Barbeque', price: 12000 },
       { id: 38, name: 'Pedas', price: 12000 },
       { id: 39, name: 'Keju', price: 12000 }
