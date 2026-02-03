@@ -60,7 +60,7 @@ window.onclick = (e) => {
 // --- INTEGRASI: DATABASE MENGIRIM STOK KE E-COMMERCE ---
 
 // URL NGROK ANDA
-const API_URL = ' https://epiphenomenal-kieth-vitalistically.ngrok-free.dev -> http://localhost:80/uliq_system/api.php?action=get_integration_data';
+const API_URL = 'https://epiphenomenal-kieth-vitalistically.ngrok-free.dev -> http://localhost:80/uliq_system/api.php?action=get_integration_data';
 
 // Fungsi Ambil Stok dari Database dan Masukkan ke Produk E-commerce
 async function syncStockFromDatabase() {
