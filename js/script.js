@@ -60,7 +60,7 @@ window.onclick = (e) => {
 // --- INTEGRASI: DATABASE MENGIRIM STOK KE E-COMMERCE ---
 
 // URL NGROK ANDA
-const API_URL = 'https://https://epiphenomenal-kieth-vitalistically.ngrok-free.dev -> http://localhost:80/uliq_system/api.php?action=get_integration_data';
+const API_URL = ' https://epiphenomenal-kieth-vitalistically.ngrok-free.dev -> http://localhost:80/uliq_system/api.php?action=get_integration_data';
 
 // Fungsi Ambil Stok dari Database dan Masukkan ke Produk E-commerce
 async function syncStockFromDatabase() {
@@ -221,7 +221,6 @@ const products = [
     basePrice: 12000,
     description: 'Komposisi yang digunakan: <br>-Pisang kepok<br>-Minyak goreng',
     variants: [
-      { id: 34, name: 'Jagung', price: 12000 },
       { id: 35, name: 'Original', price: 12000 },
       { id: 36, name: 'Jagung bakar', price: 12000 },
       { id: 37, name: 'Barbeque', price: 12000 },
