@@ -71,17 +71,19 @@ async function syncStockFromDatabase() {
     // Update array 'products' yang ada di bawah
     // Logika: Cari produk di database yang namanya mirip (substring)
     products.forEach(ecommerceProduct => {
+      // 1. MENCARI: Apakah nama DB ada di dalam nama JS?
       const dbProduct = dbProducts.find(dbItem => {
-        // Cek apakah nama database ada di dalam nama produk JS
-        // Contoh: DB "Labu Jipang Muria" akan cocok dengan JS "Labu Jipang Muria 6pcs"
         return ecommerceProduct.name.includes(dbItem.name);
       });
 
+      // 2. CETAK KE CONSOLE AGAR KITA TAHU APA YANG TERJADI
+      console.log(`Mencocokkan: "${ecommerceProduct.name}"`);
       if (dbProduct) {
+        console.log(`   > Ditemukan di DB: "${dbProduct.name}" | Stok: ${dbProduct.stock}`);
         ecommerceProduct.stock = parseInt(dbProduct.stock) || 0;
-        // Opsional: Update harga juga jika perlu, tapi di sini kita pakai harga di JS agar tidak berubah format
       } else {
-        ecommerceProduct.stock = 0; // Jika tidak ada di DB, stok 0
+        console.log(`   > TIDAK DITEMUKAN di DB. (Nama beda/ketik salah)`);
+        ecommerceProduct.stock = 0; // Diset ke 0 jika tidak ketemu (jangan 999)
       }
     });
     
