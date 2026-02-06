@@ -144,13 +144,24 @@
   <!-- My Javascript -->
   <script src="stock-sys.js"></script>
 
-  <!-- Tombol Refresh Stok Terpisah -->
+  <!-- Tombol Refresh Stok Fixed (Melayang) -->
 <button onclick="window.refreshStock()" 
-        style="position: fixed; bottom: 30px; right: 20px; 
-               background-color: #28a745; color: white; 
-               border: none; padding: 10px 20px; 
-               border-radius: 50px; cursor: pointer; 
-               font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.2); z-index: 1000;">
+        style="position: fixed;        <!-- MEMBUAT TOMBOL TETAP DI TEMPAT (NGGAK IKUT SCROLL) -->
+               bottom: 30px;           <!-- Jarak 30px dari bawah layar -->
+               right: 30px;            <!-- Jarak 30px dari kanan layar -->
+               z-index: 9999;          <!-- Supaya selalu berada paling di atas (di atas semua elemen lain) -->
+               background-color: #28a745; 
+               color: white; 
+               border: none; 
+               padding: 15px 25px;     <!-- Tombol sedikit lebih besar -->
+               border-radius: 50px;     <!-- Membulatkan sudut tombol -->
+               font-size: 16px;
+               font-weight: bold;
+               cursor: pointer;
+               box-shadow: 0 5px 15px rgba(0,0,0,0.3);  <!-- Bayangan agar tombol terlihat timbul -->
+               transition: all 0.3s ease;"
+        onmouseover="this.style.transform='translateY(-3px)'" <!-- Efek naik saat mouse di atas -->
+        onmouseout="this.style.transform='translateY(0)'">  <!-- Efek turun saat mouse keluar">
     🔄 Refresh Stok
 </button>
 </body>
