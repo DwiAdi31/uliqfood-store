@@ -423,6 +423,28 @@ window.checkout = function(e) {
 
   message += `\nTotal: ${rupiah(total)}`;
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+
+  window.refreshStock = async function() {
+    console.log("🔄 Manual Refresh diminta...");
+    const btn = document.querySelector('button[onclick="window.refreshStock()"]');
+    if(btn) {
+        btn.innerHTML = "⏳ Loading...";
+        btn.style.backgroundColor = "#ffc107"; // Kuning
+        btn.style.color = "black";
+    }
+    
+    await syncStockFromDatabase(); // Panggil ulang fungsi sync
+    renderProducts(); // Render ulang produk
+    renderCart();
+    
+    alert("Selesai! Cek apakah stok sudah berubah.");
+    
+    if(btn) {
+        btn.innerHTML = "🔄 Refresh Stok";
+        btn.style.backgroundColor = "#28a745"; // Hijau
+        btn.style.color = "white";
+    }
+  };
 };
 
 
