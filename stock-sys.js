@@ -529,4 +529,38 @@ document.addEventListener('DOMContentLoaded', () => {
   renderProducts(); // Render tampilan produk dulu (biar tidak blank putih)
   syncStockFromDatabase(); // Baru coba ambil stok
   renderCart();
+
+  // ==========================================
+// FUNGSI REFRESH STOK MANUAL
+// Letakkan di baris paling bawah file ini
+// ==========================================
+window.refreshStock = async function() {
+    console.log("🔄 Memulai Refresh Stok...");
+    
+    // Tampilkan loading di tombol
+    const btn = document.querySelector('button[onclick="window.refreshStock()"]');
+    if(btn) {
+        btn.innerText = "⏳ Loading...";
+        btn.style.backgroundColor = "#ffc107";
+        btn.style.color = "black";
+    }
+
+    // Jalankan fungsi sync stok (fungsi yang sudah ada di atas)
+    try {
+        await syncStockFromDatabase();
+        renderProducts();
+        renderCart();
+        alert("✅ Stok berhasil diperbarui!");
+    } catch (error) {
+        console.error(error);
+        alert("❌ Gagal refresh: " + error.message);
+    }
+
+    // Kembalikan tombol ke semula
+    if(btn) {
+        btn.innerText = "🔄 Refresh Stok";
+        btn.style.backgroundColor = "#28a745";
+        btn.style.color = "white";
+    }
+};
 });
