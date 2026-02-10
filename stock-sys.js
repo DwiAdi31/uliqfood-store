@@ -7,7 +7,7 @@ const API_URL = 'https://epiphenomenal-kieth-vitalistically.ngrok-free.dev/uliq_
 
 
 // ==========================================
-// DATA PRODUK
+// DATA PRODUK (DATA MASTER)
 // ==========================================
 const products = [
   {
@@ -16,7 +16,7 @@ const products = [
     name: 'Labu Jipang Muria 6pcs',
     img: 'img/labu-jipang-muria.png',
     basePrice: 20000,
-    description: 'packing plastik isi 6pcs<br>Cemilan sehat khas Muria yang terbuat dari sayur labu siem muria dan gula jagung.',
+    description: 'packing plastik isi 6pcs<br>Cemilan sehat khas Muria yang terbuat dari sayur labu siem muria dan gula jagung.<br>Komposisi yang digunakan: <br>-labu jipang<br>-biji selasih<br>-citrid asid<br>-kayu manis<br>-cengkeh<br>-gula jagung<br>-air',
     variants: [
       { id: 8, name: 'Originial 6pcs', price: 20000 },
       { id: 9, name: 'Kayu Manis 6pcs', price: 20000 },
@@ -31,7 +31,7 @@ const products = [
     name: 'Labu Jipang Muria 36pcs',
     img: 'img/labu-jipang-muria.png',
     basePrice: 70000,
-    description: '1 karton isi 36pcs<br>Cemilan sehat khas Muria.',
+    description: '1 karton isi 36pcs<br>Cemilan sehat khas Muria yang terbuat dari sayur labu siem muria dan gula jagung.<br>Komposisi yang digunakan: <br>-labu jipang<br>-biji selasih<br>-citrid asid<br>-kayu manis<br>-cengkeh<br>-gula jagung<br>-air',
     variants: [
       { id: 4, name: 'Original 36pcs', price: 70000 },
       { id: 5, name: 'Kayu Manis 36pcs', price: 70000 },
@@ -45,7 +45,7 @@ const products = [
     name: 'Labu Jipang Betawi 6pcs',
     img: 'img/labu-jipang-betawi-6pcs.png',
     basePrice: 15000,
-    description: 'Packing plastik isi 6pcs<br>Cemilan sehat khas Betawi.',
+    description: 'Packing plastik isi 6pcs<br>Cemilan sehat yang terbuat dari sayur labu siem betawi dan gula pasir.<br>Komposisi yang digunakan: <br>-labu jipang<br>-biji selasih<br>-citrid asid<br>-kayu manis<br>-cengkeh<br>-gula pasir<br>-air',
     variants: [
       { id: 16, name: 'Originial 6pcs', price: 15000 },
       { id: 17, name: 'Kayu Manis 6pcs', price: 15000 },
@@ -60,7 +60,7 @@ const products = [
     name: 'Labu Jipang Betawi 36pcs',
     img: 'img/labu-jipang-betawi.png',
     basePrice: 58000,
-    description: '1 karton isi 36 pcs.',
+    description: '1 karton isi 36 pcs<br>Cemilan sehat yang terbuat dari sayur labu siem betawi dan gula pasir.<br>Komposisi yang digunakan: <br>-labu jipang<br>-biji selasih<br>-citrid asid<br>-kayu manis<br>-cengkeh<br>-gula pasir<br>-air',
     variants: [
       { id: 12, name: 'Original 36pcs', price: 58000 },
       { id: 13, name: 'Kayu Manis 36pcs', price: 58000 },
@@ -74,7 +74,7 @@ const products = [
     name: 'Tekun (Teh Kulit Nanas)',
     img: 'img/tekun.png',
     basePrice: 45000,
-    description: '1 karton isi 40pcs 120ml.',
+    description: '1 karton isi 40pcs 120ml<br>Teh dari kulit nanas pilihan yang menyegarkan.<br>Komposisi yang digunakan: <br>-Kulit nanas<br>-Gula pasir<br>-Air',
     variants: [
       { id: 1, name: 'Kayu Manis', price: 45000 },
       { id: 2, name: 'Original', price: 45000 },
@@ -87,7 +87,7 @@ const products = [
     name: 'Tekun Celup',
     img: 'img/tekun-celup.png',
     basePrice: 45000,
-    description: 'per pcs 12gram isi 12pcs.',
+    description: 'per pcs 12gram isi 12pcs<br>Komposisi yang digunakan: <br>-Kulit nanas kering<br>-Kayu manis<br>-sereh',
     variants: [
       { id: 20, name: 'Kayu Manis', price: 45000 },
       { id: 21, name: 'Original', price: 45000 },
@@ -100,7 +100,7 @@ const products = [
     name: 'Jarelang',
     img: 'img/jarelang.png',
     basePrice: 55000,
-    description: '1 karton isi 36pcs 120ml.',
+    description: '1 karton isi 36pcs 120ml<br>Teh dari kulit nanas pilihan yang menyegarkan.<br>Komposisi yang digunakan: <br>-Jahe<br>-Jeruk nipis<br>-Sere alang alang<br>-gula batu',
     variants: [{ id: 23, name: 'Original', price: 55000 }]
   },
   {
@@ -109,7 +109,7 @@ const products = [
     name: 'Kunir Asem',
     img: 'img/kunir-asemm.png',
     basePrice: 4500,
-    description: 'Komposisi kunyit, asam jawa, gula aren.',
+    description: 'Komposisi yang digunakan: <br>-Empu kunyit<br>-Asam jawa<br>-Gula aren<br>-Kayu manis<br>',
     variants: [
       { id: 24, name: '120ml 6pcs', price: 15000 },
       { id: 25, name: '120ml 36pcs', price: 65000 },
@@ -124,7 +124,7 @@ const products = [
     name: 'Pisang Sarjana',
     img: 'img/pisang-sarjana.png',
     basePrice: 12000,
-    description: 'Pisang kepok goreng.',
+    description: 'Komposisi yang digunakan: <br>-Pisang kepok<br>-Minyak goreng<br>-Bawang Putih<br>-Ketumbar<br>-Bubuk cabai rasa',
     variants: [
       { id: 29, name: 'Spesial Ketumbar', price: 12000 },
       { id: 30, name: 'Keju Manis', price: 12000 },
@@ -138,7 +138,7 @@ const products = [
     name: 'Kpk Sarjana',
     img: 'img/kpk-sarjana.png',
     basePrice: 12000,
-    description: 'Pisang kepok krispi.',
+    description: 'Komposisi yang digunakan: <br>-Pisang kepok<br>-Minyak goreng',
     variants: [
       { id: 34, name: 'Jagung', price: 12000 },
       { id: 35, name: 'Original', price: 12000 },
@@ -154,7 +154,7 @@ const products = [
     name: 'Nenasku',
     img: 'img/nanasku.png',
     basePrice: 12000,
-    description: 'Sirsak Nanas.',
+    description: 'Komposisi yang digunakan: <br>-Nanas<br>-Gula pasir<br>-Cengkeh<br>-Kayu manis',
     variants: []
   }
 ];
@@ -225,7 +225,6 @@ async function syncStockFromDatabase() {
   } catch (error) {
     console.error("❌ Gagal Sinkronisasi:", error.message);
     // Jangan alert disini agar tidak mengganggu user saat loading pertama
-    // Tapi renderProducts tetap jalan dengan stok default (0 atau undefined)
     renderProducts(); 
   }
 }
@@ -256,7 +255,6 @@ function renderProducts(query = '') {
       }
     }
 
-    // Cek path gambar
     const imgSrc = product.img; 
 
     const cardHTML = `
@@ -423,28 +421,39 @@ window.checkout = function(e) {
 
   message += `\nTotal: ${rupiah(total)}`;
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+};
 
-  window.refreshStock = async function() {
-    console.log("🔄 Manual Refresh diminta...");
+// ==========================================
+// FUNGSI REFRESH STOK MANUAL
+// ==========================================
+window.refreshStock = async function() {
+    console.log("🔄 Memulai Refresh Stok...");
+    
+    // Tampilkan loading di tombol
     const btn = document.querySelector('button[onclick="window.refreshStock()"]');
     if(btn) {
-        btn.innerHTML = "⏳ Loading...";
-        btn.style.backgroundColor = "#ffc107"; // Kuning
+        btn.innerText = "⏳ Loading...";
+        btn.style.backgroundColor = "#ffc107";
         btn.style.color = "black";
     }
-    
-    await syncStockFromDatabase(); // Panggil ulang fungsi sync
-    renderProducts(); // Render ulang produk
-    renderCart();
-    
-    alert("Selesai! Cek apakah stok sudah berubah.");
-    
+
+    // Jalankan fungsi sync stok
+    try {
+        await syncStockFromDatabase();
+        renderProducts();
+        renderCart();
+        alert("✅ Stok berhasil diperbarui!");
+    } catch (error) {
+        console.error(error);
+        alert("❌ Gagal refresh: " + error.message);
+    }
+
+    // Kembalikan tombol ke semula
     if(btn) {
-        btn.innerHTML = "🔄 Refresh Stok";
-        btn.style.backgroundColor = "#28a745"; // Hijau
+        btn.innerText = "🔄 Refresh Stok";
+        btn.style.backgroundColor = "#28a745";
         btn.style.color = "white";
     }
-  };
 };
 
 
@@ -452,7 +461,6 @@ window.checkout = function(e) {
 // INITIALIZATION & EVENT LISTENERS
 // ==========================================
 // SEMUA LOGIC INI DIPINDAHKAN KE DALAM DOMContentLoaded
-// AGAR TIDAK ERROR NULL KARENA HTML BELUM SIAP
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -529,38 +537,4 @@ document.addEventListener('DOMContentLoaded', () => {
   renderProducts(); // Render tampilan produk dulu (biar tidak blank putih)
   syncStockFromDatabase(); // Baru coba ambil stok
   renderCart();
-
-  // ==========================================
-// FUNGSI REFRESH STOK MANUAL
-// Letakkan di baris paling bawah file ini
-// ==========================================
-window.refreshStock = async function() {
-    console.log("🔄 Memulai Refresh Stok...");
-    
-    // Tampilkan loading di tombol
-    const btn = document.querySelector('button[onclick="window.refreshStock()"]');
-    if(btn) {
-        btn.innerText = "⏳ Loading...";
-        btn.style.backgroundColor = "#ffc107";
-        btn.style.color = "black";
-    }
-
-    // Jalankan fungsi sync stok (fungsi yang sudah ada di atas)
-    try {
-        await syncStockFromDatabase();
-        renderProducts();
-        renderCart();
-        alert("✅ Stok berhasil diperbarui!");
-    } catch (error) {
-        console.error(error);
-        alert("❌ Gagal refresh: " + error.message);
-    }
-
-    // Kembalikan tombol ke semula
-    if(btn) {
-        btn.innerText = "🔄 Refresh Stok";
-        btn.style.backgroundColor = "#28a745";
-        btn.style.color = "white";
-    }
-};
 });
