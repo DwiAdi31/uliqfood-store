@@ -193,13 +193,9 @@ async function syncStockFromDatabase() {
   }
 
   try {
-    const response = await fetch(API_URL, {
-      method: 'GET',
-      headers: {
-        'ngrok-skip-browser-warning': 'true',
-        'Content-Type': 'application/json'
-      }
-    });
+    // PERUBAHAN DI SINI: Menggunakan fetch tanpa headers khusus
+    // Ini menghindari Preflight CORS yang diblokir InfinityFree
+    const response = await fetch(API_URL);
     
     if (!response.ok) throw new Error(`HTTP Status: ${response.status}`);
     
@@ -219,6 +215,14 @@ async function syncStockFromDatabase() {
         jsProduct.stock = 0;
       }
     });
+    
+    renderProducts(); 
+
+  } catch (error) {
+    console.error("❌ Gagal Sinkronisasi:", error.message);
+    renderProducts(); 
+  }
+}
     
     renderProducts(); // Update tampilan stok
 
