@@ -193,8 +193,7 @@ async function syncStockFromDatabase() {
   }
 
   try {
-    // PERUBAHAN DI SINI: Menggunakan fetch tanpa headers khusus
-    // Ini menghindari Preflight CORS yang diblokir InfinityFree
+    // PERUBAHAN: Menggunakan fetch tanpa headers custom untuk menghindari CORS
     const response = await fetch(API_URL);
     
     if (!response.ok) throw new Error(`HTTP Status: ${response.status}`);
@@ -414,6 +413,7 @@ window.checkout = function(e) {
     total += item.price * item.quantity;
   });
 
+  // Memperbaiki kutip di baris ini
   message += `\nTotal: ${rupiah(total)}`;
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
 };
@@ -424,7 +424,6 @@ window.checkout = function(e) {
 window.refreshStock = async function() {
     console.log("🔄 Memulai Refresh Stok...");
     
-    // Tampilkan loading di tombol
     const btn = document.querySelector('button[onclick="window.refreshStock()"]');
     if(btn) {
         btn.innerText = "⏳ Loading...";
@@ -432,7 +431,6 @@ window.refreshStock = async function() {
         btn.style.color = "black";
     }
 
-    // Jalankan fungsi sync stok
     try {
         await syncStockFromDatabase();
         renderProducts();
@@ -443,7 +441,6 @@ window.refreshStock = async function() {
         alert("❌ Gagal refresh: " + error.message);
     }
 
-    // Kembalikan tombol ke semula
     if(btn) {
         btn.innerText = "🔄 Refresh Stok";
         btn.style.backgroundColor = "#28a745";
@@ -455,13 +452,9 @@ window.refreshStock = async function() {
 // ==========================================
 // INITIALIZATION & EVENT LISTENERS
 // ==========================================
-// SEMUA LOGIC INI DIPINDAHKAN KE DALAM DOMContentLoaded
-// ==========================================
-
 document.addEventListener('DOMContentLoaded', () => {
   console.log("✅ DOM Loaded. Inisialisasi Aplikasi...");
 
-  // 1. Ambil Elemen DOM
   productListElement = document.querySelector('#product-list');
   if (!productListElement) productListElement = document.querySelector('.product-list');
 
@@ -473,11 +466,9 @@ document.addEventListener('DOMContentLoaded', () => {
   searchForm = document.querySelector('.search-form');
   shoppingCart = document.querySelector('.shopping-cart');
 
-  // Debug Log
   console.log("Status Product List:", !!productListElement);
   console.log("Status Cart Container:", !!cartContainer);
 
-  // 2. Setup Event Listeners
   const hamburgerBtn = document.querySelector('#hamburger-menu');
   const searchBtn = document.querySelector('#search-button');
   const cartBtn = document.querySelector('#shopping-cart-button');
@@ -510,7 +501,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  // Klik di luar elemen
   document.addEventListener('click', function (e) {
     if (hamburgerBtn && !hamburgerBtn.contains(e.target) && navbarNav && !navbarNav.contains(e.target)) {
       navbarNav.classList.remove('active');
@@ -522,14 +512,12 @@ document.addEventListener('DOMContentLoaded', () => {
       shoppingCart.classList.remove('active');
     }
     
-    // Modal Close
     if (e.target === itemDetailModal) {
       itemDetailModal.style.display = 'none';
     }
   });
 
-  // 3. Jalankan Fungsi Utama
-  renderProducts(); // Render tampilan produk dulu (biar tidak blank putih)
-  syncStockFromDatabase(); // Baru coba ambil stok
+  renderProducts(); 
+  syncStockFromDatabase();
   renderCart();
 });
