@@ -223,15 +223,6 @@ async function syncStockFromDatabase() {
     renderProducts(); 
   }
 }
-    
-    renderProducts(); // Update tampilan stok
-
-  } catch (error) {
-    console.error("❌ Gagal Sinkronisasi:", error.message);
-    // Jangan alert disini agar tidak mengganggu user saat loading pertama
-    renderProducts(); 
-  }
-}
 
 // 2. RENDER PRODUK
 function renderProducts(query = '') {
