@@ -183,34 +183,34 @@ const safeReplaceFeather = () => {
 };
 
 // 1. SYNC STOCK
+// ==========================================
+// 1. SYNC STOCK (PERBAIKAN: PAKE API_URL)
+// ==========================================
 async function syncStockFromDatabase() {
-  console.log("⏳ Memulai Sinkronisasi (Via Proxy Vercel)...");
+  console.log("⏳ Memulai Sinkronisasi (Direct URL)...");
   
+  if (API_URL.includes('ISI-DISINI')) {
+    console.warn("URL Ngrok belum diisi.");
+    return;
+  }
+
   try {
-    // URL MELALUI PROXY VERCEL
-    const response = await fetch('/backend-api/api.php?action=get_integration_data');
+    // PERUBAHAN UTAMA: GUNAKAN API_URL YANG SUDAH BENAR
+    const response = await fetch(API_URL);
     
     if (!response.ok) {
-        console.error("HTTP Error Status:", response.status);
-        throw new Error(`HTTP Status: ${response.status}`);
+      console.error("HTTP Error Status:", response.status);
+      throw new Error(`HTTP Status: ${response.status}`);
     }
     
     const text = await response.text();
-
-    // ==========================================
-    // DEBUGGING: TAMPILKAN ISI RESPON ASLI
-    // ==========================================
-    console.log("=================================================");
-    console.log("RAW RESPONSE (Isi Error Backend):", text);
-    console.log("=================================================");
-
+    
+    // Cek apakah respon JSON valid (Cegah Error Cloudflare)
     if (text.includes('<!DOCTYPE') || !text.trim().startsWith('[')) {
-      // Tampilkan potongan error untuk dibaca user
-      console.error("Error Summary:", text.substring(0, 300));
-      throw new Error("Respon Server Bukan JSON. (Cek Console untuk detail)");
+      console.error("Raw Response (Error):", text.substring(0, 200));
+      throw new Error("Respon Server Bukan JSON.");
     }
 
-    // Jika sukses parsing JSON...
     const data = JSON.parse(text);
     console.log("✅ Data Stok Diterima:", data.length, "item");
 
