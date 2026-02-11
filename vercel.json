@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/backend-api/:path*",
+      "destination": "https://uliq-food.page.gd/uliq_system/:path*"
+    }
+  ]
+}
