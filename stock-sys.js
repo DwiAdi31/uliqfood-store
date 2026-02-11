@@ -1,7 +1,7 @@
 // ==========================================
 // CONFIGURATION
 // ==========================================
-const API_URL = 'https://uliq-food.page.gd/uliq_system/api.php?action=get_integration_data';
+fetch('https://uliq-food.page.gd/uliq_system/api.php?action=get_integration_data/')
 // Pastikan URL di atas benar. Jika ngrok mati/restart, URL harus diganti!
 
 
