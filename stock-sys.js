@@ -185,24 +185,33 @@ const safeReplaceFeather = () => {
 
 // 1. SYNC STOCK
 async function syncStockFromDatabase() {
-  console.log("⏳ Memulai Sinkronisasi Stok...");
+  console.log("⏳ Memulai Sinkronisasi (Via Proxy Vercel)...");
   
-  if (API_URL.includes('ISI-DISINI')) {
-    console.warn("URL Ngrok belum diisi.");
-    return;
-  }
-
   try {
-    // PERUBAHAN: Menggunakan fetch tanpa headers custom untuk menghindari CORS
-    const response = await fetch(API_URL);
+    // URL MELALUI PROXY VERCEL
+    const response = await fetch('/backend-api/api.php?action=get_integration_data');
     
-    if (!response.ok) throw new Error(`HTTP Status: ${response.status}`);
+    if (!response.ok) {
+        console.error("HTTP Error Status:", response.status);
+        throw new Error(`HTTP Status: ${response.status}`);
+    }
     
     const text = await response.text();
+
+    // ==========================================
+    // DEBUGGING: TAMPILKAN ISI RESPON ASLI
+    // ==========================================
+    console.log("=================================================");
+    console.log("RAW RESPONSE (Isi Error Backend):", text);
+    console.log("=================================================");
+
     if (text.includes('<!DOCTYPE') || !text.trim().startsWith('[')) {
-      throw new Error("Respon Server Bukan JSON.");
+      // Tampilkan potongan error untuk dibaca user
+      console.error("Error Summary:", text.substring(0, 300));
+      throw new Error("Respon Server Bukan JSON. (Cek Console untuk detail)");
     }
 
+    // Jika sukses parsing JSON...
     const data = JSON.parse(text);
     console.log("✅ Data Stok Diterima:", data.length, "item");
 
