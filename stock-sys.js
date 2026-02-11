@@ -1,9 +1,8 @@
 // ==========================================
 // CONFIGURATION
 // ==========================================
-fetch('https://uliq-food.page.gd/uliq_system/api.php?action=get_integration_data/')
-// Pastikan URL di atas benar. Jika ngrok mati/restart, URL harus diganti!
-
+// DEFINISIKAN API URL DI SINI AGAR BISA DIPANGGIL OLEH FUNGSI
+const API_URL = 'https://uliq-food.page.gd/uliq_system/api.php?action=get_integration_data';
 
 // ==========================================
 // DATA PRODUK (DATA MASTER)
@@ -103,7 +102,7 @@ const products = [
     variants: [{ id: 23, name: 'Original', price: 55000 }]
   },
   {
-    numericId:  8,
+    numericId: 8,
     id: '8',
     name: 'Kunir Asem',
     img: 'img/kunir-asemm.png',
@@ -183,19 +182,16 @@ const safeReplaceFeather = () => {
 };
 
 // 1. SYNC STOCK
-// ==========================================
-// 1. SYNC STOCK (PERBAIKAN: PAKE API_URL)
-// ==========================================
 async function syncStockFromDatabase() {
-  console.log("⏳ Memulai Sinkronisasi (Direct URL)...");
+  console.log("⏳ Memulai Sinkronisasi Stok...");
   
-  if (API_URL.includes('ISI-DISINI')) {
-    console.warn("URL Ngrok belum diisi.");
+  // Validasi URL
+  if (!API_URL) {
+    console.error("API_URL tidak didefinisikan!");
     return;
   }
 
   try {
-    // PERUBAHAN UTAMA: GUNAKAN API_URL YANG SUDAH BENAR
     const response = await fetch(API_URL);
     
     if (!response.ok) {
@@ -207,19 +203,24 @@ async function syncStockFromDatabase() {
     
     // Cek apakah respon JSON valid (Cegah Error Cloudflare)
     if (text.includes('<!DOCTYPE') || !text.trim().startsWith('[')) {
-      console.error("Raw Response (Error):", text.substring(0, 200));
+      console.error("Raw Response (Bukan JSON):", text.substring(0, 200));
       throw new Error("Respon Server Bukan JSON.");
     }
 
     const data = JSON.parse(text);
     console.log("✅ Data Stok Diterima:", data.length, "item");
 
+    // Update array products dengan data dari database
     products.forEach(jsProduct => {
+      // Mencocokkan ID numerik (JS) dengan ID string/integer (DB)
+      // Kita pakai parseInt agar aman
       const dbProduct = data.find(dbItem => parseInt(dbItem.id) === jsProduct.numericId);
+      
       if (dbProduct) {
         jsProduct.stock = parseInt(dbProduct.stock) || 0;
+        console.log(`Update stok: ${jsProduct.name} -> ${jsProduct.stock}`);
       } else {
-        jsProduct.stock = 0;
+        jsProduct.stock = 0; // Jika tidak ada di DB, anggap stok 0
       }
     });
     
@@ -227,6 +228,7 @@ async function syncStockFromDatabase() {
 
   } catch (error) {
     console.error("❌ Gagal Sinkronisasi:", error.message);
+    // Tetap render produk walaupun gagal ambil stok (stok akan kosong/undefined)
     renderProducts(); 
   }
 }
@@ -234,7 +236,12 @@ async function syncStockFromDatabase() {
 // 2. RENDER PRODUK
 function renderProducts(query = '') {
   if (!productListElement) {
-    console.error("Elemen Produk Tidak Ditemukan!");
+    productListElement = document.querySelector('#product-list');
+    if(!productListElement) productListElement = document.querySelector('.product-list');
+  }
+  
+  if (!productListElement) {
+    console.error("Elemen Produk Tidak Ditemukan di HTML!");
     return;
   }
 
@@ -421,7 +428,6 @@ window.checkout = function(e) {
     total += item.price * item.quantity;
   });
 
-  // Memperbaiki kutip di baris ini
   message += `\nTotal: ${rupiah(total)}`;
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
 };
@@ -464,8 +470,6 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log("✅ DOM Loaded. Inisialisasi Aplikasi...");
 
   productListElement = document.querySelector('#product-list');
-  if (!productListElement) productListElement = document.querySelector('.product-list');
-
   cartContainer = document.querySelector('.shopping-cart .cart-list');
   if (!cartContainer) cartContainer = document.querySelector('.shopping-cart');
   
@@ -473,9 +477,6 @@ document.addEventListener('DOMContentLoaded', () => {
   navbarNav = document.querySelector('.navbar-nav');
   searchForm = document.querySelector('.search-form');
   shoppingCart = document.querySelector('.shopping-cart');
-
-  console.log("Status Product List:", !!productListElement);
-  console.log("Status Cart Container:", !!cartContainer);
 
   const hamburgerBtn = document.querySelector('#hamburger-menu');
   const searchBtn = document.querySelector('#search-button');
@@ -526,6 +527,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   renderProducts(); 
-  syncStockFromDatabase();
+  syncStockFromDatabase(); // Panggil fungsi sync saat load
   renderCart();
 });
