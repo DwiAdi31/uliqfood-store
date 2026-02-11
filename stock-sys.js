@@ -2,6 +2,8 @@
 // CONFIGURATION
 // ==========================================
 const API_URL = 'https://uliq-food.page.gd/uliq_system/api.php?action=get_integration_data';
+// Tambah timestamp di akhir URL
+fetch('https://uliq-food.page.gd/uliq_system/api.php?action=get_integration_data&t=' + new Date().getTime())
 // Pastikan URL di atas benar. Jika ngrok mati/restart, URL harus diganti!
 
 
